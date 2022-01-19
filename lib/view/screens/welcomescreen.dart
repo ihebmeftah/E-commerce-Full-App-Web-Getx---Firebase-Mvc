@@ -1,7 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Welcomescreen extends StatelessWidget {
@@ -103,7 +105,9 @@ class Welcomescreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 40, vertical: 12)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offNamed(Routes.loginScreen);
+                    },
                     child: const TextUtils(
                       txt: 'Get Start',
                       clr: Colors.white,
@@ -122,7 +126,9 @@ class Welcomescreen extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.normal),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offNamed(Routes.signUpSCreen);
+                      },
                       child: Text(
                         'Sign up',
                         style: GoogleFonts.lato(
