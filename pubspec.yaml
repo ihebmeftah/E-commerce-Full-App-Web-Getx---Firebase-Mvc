@@ -41,7 +41,7 @@ dependencies:
   get_storage: ^2.0.3
   google_fonts: ^2.2.0
   http: ^0.13.4
-
+  animated_text_kit: ^4.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
