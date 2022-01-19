@@ -25,6 +25,7 @@ class AuthFields extends StatelessWidget {
       keyboardType: TextInputType.text,
       validator: (value) => validate(value),
       decoration: InputDecoration(
+        fillColor: Colors.grey.shade200,
         prefixIcon: pIcon,
         suffix: sIcon,
         hintText: hText,
@@ -41,6 +42,12 @@ class AuthFields extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(10)),
         errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(10)),
+        border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(10)),
+        disabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(10)),
       ),

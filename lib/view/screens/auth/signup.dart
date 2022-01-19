@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:ecommerceapp/utils/my_string.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/authbutton.dart';
 import 'package:ecommerceapp/view/widgets/authfields.dart';
@@ -7,9 +8,11 @@ import 'package:ecommerceapp/view/widgets/bottomcontainer.dart';
 import 'package:ecommerceapp/view/widgets/checkwidget.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
+  final formKey = GlobalKey();
   TextEditingController nameCntrl = TextEditingController();
   TextEditingController passCntrl = TextEditingController();
   TextEditingController emailCntrl = TextEditingController();
@@ -17,9 +20,9 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
           elevation: 0,
         ),
         body: SingleChildScrollView(
@@ -33,70 +36,127 @@ class SignupScreen extends StatelessWidget {
                     left: 25,
                     right: 25,
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: const [
-                          TextUtils(
-                              clr: mainColor,
-                              txt: 'SIGN',
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
-                          SizedBox(
-                            width: 5,
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            TextUtils(
+                                clr: Get.isDarkMode ? mainColor : pinkClr,
+                                txt: 'SIGN',
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            TextUtils(
+                                clr: Get.isDarkMode
+                                    ? Colors.black
+                                    : Colors.white,
+                                txt: 'UP',
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        AuthFields(
+                          cntrl: nameCntrl,
+                          isPass: false,
+                          validate: (value) {
+                            if (value.toString().length <= 2 ||
+                                !RegExp(validationName).hasMatch(value)) {
+                              return 'Enter valid name ';
+                            } else {
+                              return null;
+                            }
+                          },
+                          pIcon: Get.isDarkMode
+                              ? const Icon(
+                                  Icons.person,
+                                  color: Colors.greenAccent,
+                                  size: 30,
+                                )
+                              : const Icon(
+                                  Icons.person,
+                                  color: pinkClr,
+                                  size: 30,
+                                ),
+                          sIcon: const SizedBox(),
+                          hText: 'User Name',
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        AuthFields(
+                          cntrl: emailCntrl,
+                          isPass: false,
+                          validate: (value) {
+                            if (!RegExp(validationEmail).hasMatch(value)) {
+                              return 'Enter valid Email ';
+                            } else {
+                              return null;
+                            }
+                          },
+                          pIcon: Get.isDarkMode
+                              ? const Icon(
+                                  Icons.mail,
+                                  size: 30,
+                                  color: Colors.greenAccent,
+                                )
+                              : const Icon(
+                                  Icons.mail,
+                                  size: 30,
+                                  color: pinkClr,
+                                ),
+                          sIcon: const SizedBox(),
+                          hText: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        AuthFields(
+                          cntrl: passCntrl,
+                          isPass: true,
+                          validate: (value) {
+                            if (value.toString().length <= 8) {
+                              return 'Invalid password';
+                            } else {
+                              return null;
+                            }
+                          },
+                          pIcon: Get.isDarkMode
+                              ? const Icon(
+                                  Icons.lock,
+                                  size: 30,
+                                  color: Colors.greenAccent,
+                                )
+                              : const Icon(
+                                  Icons.lock,
+                                  size: 30,
+                                  color: pinkClr,
+                                ),
+                          sIcon: IconButton(
+                            icon: const Icon(Icons.visibility),
+                            onPressed: () {},
                           ),
-                          TextUtils(
-                              clr: Colors.black,
-                              txt: 'UP',
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      AuthFields(
-                        cntrl: nameCntrl,
-                        isPass: false,
-                        validate: () {},
-                        pIcon: Image.asset("images/user.png"),
-                        sIcon: const SizedBox(),
-                        hText: 'User Name',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      AuthFields(
-                        cntrl: emailCntrl,
-                        isPass: false,
-                        validate: () {},
-                        pIcon: Image.asset("images/email.png"),
-                        sIcon: const SizedBox(),
-                        hText: 'Email',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      AuthFields(
-                        cntrl: passCntrl,
-                        isPass: true,
-                        validate: () {},
-                        pIcon: Image.asset("images/lock.png"),
-                        sIcon: const SizedBox(),
-                        hText: 'Password',
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      const CheckWidget(),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      AuthButton(
-                        onPressed: () {},
-                        txt: 'Sign up',
-                      ),
-                    ],
+                          hText: 'Password',
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const CheckWidget(),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        AuthButton(
+                          onPressed: () {},
+                          txt: 'Sign up',
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
