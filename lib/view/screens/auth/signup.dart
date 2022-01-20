@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print, unused_local_variable
 
 import 'package:ecommerceapp/logic/controllers/authcontroller.dart';
 import 'package:ecommerceapp/routes/routes.dart';
@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({Key? key}) : super(key: key);
-  final formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController nameCntrl = TextEditingController();
   TextEditingController passCntrl = TextEditingController();
   TextEditingController emailCntrl = TextEditingController();
@@ -160,16 +160,33 @@ class SignupScreen extends StatelessWidget {
                           );
                         }),
                         const SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
                         CheckWidget(),
                         const SizedBox(
                           height: 40,
                         ),
-                        AuthButton(
-                          onPressed: () {},
-                          txt: 'Sign up',
-                        ),
+                        GetBuilder<Authcontroller>(builder: (_) {
+                          return AuthButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                if (controller.ischecked) {
+                                  controller.signUpFireBase(
+                                      name: nameCntrl.text.trim(),
+                                      email: emailCntrl.text.trim(),
+                                      password: passCntrl.text.trim());
+                                } else {
+                                  Get.snackbar('Terms',
+                                      'Please accept Terms & conditions',
+                                      backgroundColor: Colors.red,
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.BOTTOM);
+                                }
+                              }
+                            },
+                            txt: 'Sign up',
+                          );
+                        })
                       ],
                     ),
                   ),

@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
 
   TextEditingController emailCntrl = TextEditingController();
   TextEditingController passCntrl = TextEditingController();
-  final formKey = GlobalKey();
+  final GlobalKey<FormState> formKey = GlobalKey();
   final controller = Get.find<Authcontroller>();
 
   @override
@@ -148,9 +148,19 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(
                           height: 50,
                         ),
-                        AuthButton(
-                          onPressed: () {},
-                          txt: 'Log In',
+                        GetBuilder<Authcontroller>(
+                          builder: (_) {
+                            return AuthButton(
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  controller.loginFireBase(
+                                      email: emailCntrl.text.trim(),
+                                      password: passCntrl.text.trim());
+                                }
+                              },
+                              txt: 'Log In',
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 20,
