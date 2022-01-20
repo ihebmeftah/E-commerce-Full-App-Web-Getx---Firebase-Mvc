@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:ecommerceapp/logic/controllers/authcontroller.dart';
+import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/my_string.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/authbutton.dart';
@@ -16,6 +18,7 @@ class SignupScreen extends StatelessWidget {
   TextEditingController nameCntrl = TextEditingController();
   TextEditingController passCntrl = TextEditingController();
   TextEditingController emailCntrl = TextEditingController();
+  final controller = Get.find<Authcontroller>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -117,37 +120,49 @@ class SignupScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        AuthFields(
-                          cntrl: passCntrl,
-                          isPass: true,
-                          validate: (value) {
-                            if (value.toString().length <= 8) {
-                              return 'Invalid password';
-                            } else {
-                              return null;
-                            }
-                          },
-                          pIcon: Get.isDarkMode
-                              ? const Icon(
-                                  Icons.lock,
-                                  size: 30,
-                                  color: Colors.greenAccent,
-                                )
-                              : const Icon(
-                                  Icons.lock,
-                                  size: 30,
-                                  color: pinkClr,
-                                ),
-                          sIcon: IconButton(
-                            icon: const Icon(Icons.visibility),
-                            onPressed: () {},
-                          ),
-                          hText: 'Password',
-                        ),
+                        GetBuilder<Authcontroller>(builder: (_) {
+                          return AuthFields(
+                            cntrl: passCntrl,
+                            isPass: controller.isVisible ? false : true,
+                            validate: (value) {
+                              if (value.toString().length <= 8) {
+                                return 'Enter valid password';
+                              } else {
+                                return null;
+                              }
+                            },
+                            pIcon: Get.isDarkMode
+                                ? const Icon(
+                                    Icons.lock,
+                                    size: 30,
+                                    color: Colors.greenAccent,
+                                  )
+                                : const Icon(
+                                    Icons.lock,
+                                    size: 30,
+                                    color: pinkClr,
+                                  ),
+                            sIcon: InkWell(
+                              onTap: () {
+                                controller.visibile();
+                              },
+                              child: controller.isVisible
+                                  ? const Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.black,
+                                    )
+                                  : const Icon(
+                                      Icons.visibility,
+                                      color: Colors.black,
+                                    ),
+                            ),
+                            hText: 'Password',
+                          );
+                        }),
                         const SizedBox(
                           height: 50,
                         ),
-                        const CheckWidget(),
+                        CheckWidget(),
                         const SizedBox(
                           height: 40,
                         ),
@@ -161,7 +176,9 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               BottomContainer(
-                onPress: () {},
+                onPress: () {
+                  Get.offNamed(Routes.loginScreen);
+                },
                 txt: "Don't have an Account? ",
                 txt2: 'Log in',
               ),
