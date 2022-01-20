@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/logic/bindings/authbindings.dart';
+import 'package:ecommerceapp/view/screens/auth/forgotpassword.dart';
 import 'package:ecommerceapp/view/screens/auth/login.dart';
 import 'package:ecommerceapp/view/screens/auth/signup.dart';
 import 'package:ecommerceapp/view/screens/welcomescreen.dart';
@@ -25,6 +26,11 @@ class Approutes {
       page: () => LoginScreen(),
       binding: Authbindings(),
     ),
+    GetPage(
+      name: Routes.forgotPasswordScreen,
+      page: () =>  ForgotpasswordScreen(),
+      binding: Authbindings(),
+    ),
   ];
 }
 
@@ -32,4 +38,5 @@ class Routes {
   static const welcome = '/welcomeScreen';
   static const loginScreen = '/loginScreen';
   static const signUpSCreen = '/signUpSCreen';
+  static const forgotPasswordScreen = '/forgotPasswordScreen';
 }
