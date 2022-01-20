@@ -26,14 +26,14 @@ class BottomContainer extends StatelessWidget {
           TextUtils(
               clr: Colors.white,
               txt: txt,
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.bold),
           TextButton(
               onPressed: onPress,
               child: TextUtils(
-                  clr: Colors.white,
+                  clr: Colors.white70,
                   txt: txt2,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold))
         ],
       ),

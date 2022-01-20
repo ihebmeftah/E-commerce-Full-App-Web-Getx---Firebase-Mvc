@@ -59,7 +59,7 @@ class SignupScreen extends StatelessWidget {
                                     : Colors.white,
                                 txt: 'UP',
                                 fontSize: 28,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w500),
                           ],
                         ),
                         const SizedBox(
@@ -179,7 +179,7 @@ class SignupScreen extends StatelessWidget {
                 onPress: () {
                   Get.offNamed(Routes.loginScreen);
                 },
-                txt: "Don't have an Account? ",
+                txt: "Already have an Account? ",
                 txt2: 'Log in',
               ),
             ],

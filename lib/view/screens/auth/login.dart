@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:ecommerceapp/logic/controllers/authcontroller.dart';
+import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/my_string.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/authbutton.dart';
 import 'package:ecommerceapp/view/widgets/authfields.dart';
+import 'package:ecommerceapp/view/widgets/bottomcontainer.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                                     : Colors.white,
                                 txt: 'IN',
                                 fontSize: 28,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w500),
                           ],
                         ),
                         const SizedBox(
@@ -129,17 +131,57 @@ class LoginScreen extends StatelessWidget {
                             hText: 'Password',
                           );
                         }),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: TextUtils(
+                                  clr: Get.isDarkMode
+                                      ? Colors.black
+                                      : Colors.white,
+                                  txt: 'Forgot password ?',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal)),
+                        ),
                         const SizedBox(
                           height: 50,
                         ),
                         AuthButton(
                           onPressed: () {},
-                          txt: 'Sign up',
+                          txt: 'Log In',
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextUtils(
+                            clr: Get.isDarkMode ? Colors.black : Colors.white,
+                            txt: 'OR',
+                            fontSize: 24,
+                            fontWeight: FontWeight.w300),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(child: Image.asset("images/facebook.png")),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            InkWell(child: Image.asset("images/google.png")),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
+              ),
+              BottomContainer(
+                onPress: () {
+                  Get.offNamed(Routes.signUpSCreen);
+                },
+                txt: "Don't have an Account? ",
+                txt2: 'Sign Up',
               ),
             ],
           ),
