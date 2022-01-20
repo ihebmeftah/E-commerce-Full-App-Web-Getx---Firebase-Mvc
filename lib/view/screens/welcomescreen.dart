@@ -77,16 +77,16 @@ class Welcomescreen extends StatelessWidget {
                       color: Colors.black.withOpacity(0.4)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       TextUtils(
-                          clr: mainColor,
+                          clr: Get.isDarkMode ? mainColor : pinkClr,
                           txt: 'Iheb',
                           fontSize: 35,
                           fontWeight: FontWeight.bold),
-                      SizedBox(
+                      const SizedBox(
                         width: 7,
                       ),
-                      TextUtils(
+                      const TextUtils(
                           clr: Colors.white,
                           txt: 'Shop',
                           fontSize: 35,
@@ -99,7 +99,7 @@ class Welcomescreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: mainColor,
+                        primary: Get.isDarkMode ? mainColor : pinkClr,
                         elevation: 2,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
