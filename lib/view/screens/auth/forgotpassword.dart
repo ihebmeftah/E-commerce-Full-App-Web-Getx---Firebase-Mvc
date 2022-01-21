@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:ecommerceapp/logic/controllers/authcontroller.dart';
 import 'package:ecommerceapp/utils/my_string.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/authbutton.dart';
@@ -10,6 +11,8 @@ import 'package:get/get.dart';
 class ForgotpasswordScreen extends StatelessWidget {
   ForgotpasswordScreen({Key? key}) : super(key: key);
   TextEditingController emailCntrl = TextEditingController();
+  final conroller = Get.find<Authcontroller>();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class ForgotpasswordScreen extends StatelessWidget {
         ),
       ),
       body: Form(
+        key: formKey,
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -78,7 +82,17 @@ class ForgotpasswordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                AuthButton(txt: 'SEND', onPressed: () {})
+                GetBuilder<Authcontroller>(
+                  builder: (_) {
+                    return AuthButton(
+                        txt: 'SEND',
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            conroller.passwordResetFireBase(emailCntrl.text.trim());
+                          }
+                        });
+                  },
+                )
               ],
             ),
           ),

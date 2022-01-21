@@ -4,12 +4,15 @@ import 'package:ecommerceapp/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Authcontroller extends GetxController {
   bool isVisible = false;
   bool ischecked = false;
   String displayUserName = '';
+  String displayUserPhoto = '';
   FirebaseAuth auth = FirebaseAuth.instance;
+  var googleSignin = GoogleSignIn();
   void visibile() {
     isVisible = !isVisible;
     update();
@@ -58,8 +61,7 @@ class Authcontroller extends GetxController {
     }
   }
 
-  void loginFireBase(
-      {required String email, required String password}) async {
+  void loginFireBase({required String email, required String password}) async {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
@@ -88,8 +90,46 @@ class Authcontroller extends GetxController {
     }
   }
 
-  void googlesignUpFireBase() async {}
+  void googlesignUpFireBase() async {
+    final GoogleSignInAccount? googleUser = await googleSignin.signIn();
+    try {
+      displayUserName = googleUser!.displayName!;
+      displayUserPhoto = googleUser.photoUrl!;
+      update();
+      Get.offNamed(Routes.mainScreen);
+    } catch (e) {
+      Get.snackbar('ERROR', e.toString(),
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
   void facebooksignUpFireBase() async {}
-  void passwordResetFireBase() async {}
+  void passwordResetFireBase(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      update();
+      Get.back();
+    } on FirebaseAuthException catch (e) {
+      String title = e.code.replaceAll(RegExp('-'), ' ').capitalize!;
+      String message = '';
+      if (e.code == 'user-not-found') {
+        message = 'No user found for that email.';
+      } else {
+        message = e.message.toString();
+      }
+      Get.snackbar(title, message,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    } catch (e) {
+      Get.snackbar('ERROR', e.toString(),
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
+
   void logOutFireBase() async {}
 }
