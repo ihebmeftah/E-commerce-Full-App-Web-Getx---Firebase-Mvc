@@ -9,6 +9,7 @@ import 'package:ecommerceapp/view/widgets/authfields.dart';
 import 'package:ecommerceapp/view/widgets/bottomcontainer.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -175,24 +176,26 @@ class LoginScreen extends StatelessWidget {
                         ),
                         GetBuilder<Authcontroller>(
                           builder: (_) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  child: Image.asset("images/facebook.png"),
-                                  onTap: () {},
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                InkWell(
-                                  child: Image.asset("images/google.png"),
-                                  onTap: () {
-                                    controller.googlesignUpFireBase();
-                                  },
-                                ),
-                              ],
-                            );
+                            return Center(
+                                child: IconButton(
+                                    iconSize: 20,
+                                    icon: CircleAvatar(
+                                      backgroundColor: Get.isDarkMode
+                                          ? Colors.black
+                                          : Colors.red,
+                                      radius: 60,
+                                      child: Center(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.google,
+                                          color: Get.isDarkMode
+                                              ? Colors.black
+                                              : Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      controller.googlesignUpFireBase();
+                                    }));
                           },
                         )
                       ],

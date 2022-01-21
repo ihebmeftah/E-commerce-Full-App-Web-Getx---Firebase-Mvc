@@ -105,7 +105,6 @@ class Authcontroller extends GetxController {
     }
   }
 
-  void facebooksignUpFireBase() async {}
   void passwordResetFireBase(String email) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
