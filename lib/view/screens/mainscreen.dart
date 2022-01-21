@@ -14,7 +14,7 @@ class Mainscreen extends StatelessWidget {
     return Obx(() {
       return SafeArea(
           child: Scaffold(
-        backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
           actions: [
             IconButton(

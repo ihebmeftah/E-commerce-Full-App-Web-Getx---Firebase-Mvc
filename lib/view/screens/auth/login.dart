@@ -179,18 +179,13 @@ class LoginScreen extends StatelessWidget {
                             return Center(
                                 child: IconButton(
                                     iconSize: 20,
-                                    icon: CircleAvatar(
-                                      backgroundColor: Get.isDarkMode
-                                          ? Colors.black
-                                          : Colors.red,
-                                      radius: 60,
-                                      child: Center(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.google,
-                                          color: Get.isDarkMode
-                                              ? Colors.black
-                                              : Colors.white,
-                                        ),
+                                    icon: Center(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.google,
+                                        color: Get.isDarkMode
+                                            ? Colors.green
+                                            : Colors.white,
+                                        size: 40,
                                       ),
                                     ),
                                     onPressed: () {
