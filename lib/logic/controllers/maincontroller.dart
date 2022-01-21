@@ -11,7 +11,7 @@ class MainController extends GetxController {
     const HomeScreen(),
     const CategoryScreen(),
     const FavoritesScreen(),
-    const SettingsScreen()
+     SettingsScreen()
   ].obs;
 
   final title = ['Iheb Shop','Categories','Favorites','Settings'].obs;

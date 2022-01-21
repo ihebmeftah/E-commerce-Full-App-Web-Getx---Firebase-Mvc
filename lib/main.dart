@@ -1,6 +1,7 @@
 import 'package:ecommerceapp/logic/controllers/themecontroller.dart';
 import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,10 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemesApp.dark,
       themeMode: ThemeControle().ThemeDataGet,
       debugShowCheckedModeBanner: false,
-      initialRoute: Approutes.welcome,
+      initialRoute: FirebaseAuth.instance.currentUser != null ||
+              GetStorage().read<bool>('auth') == true
+          ? Approutes.mainscreen 
+          : Approutes.welcome,
       getPages: Approutes.routes,
     );
   }

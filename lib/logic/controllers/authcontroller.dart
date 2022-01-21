@@ -4,6 +4,7 @@ import 'package:ecommerceapp/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authcontroller extends GetxController {
@@ -13,6 +14,9 @@ class Authcontroller extends GetxController {
   String displayUserPhoto = '';
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSignin = GoogleSignIn();
+  bool isSignIn = false;
+  final GetStorage authbox = GetStorage();
+
   void visibile() {
     isVisible = !isVisible;
     update();
@@ -66,6 +70,8 @@ class Authcontroller extends GetxController {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => displayUserName = auth.currentUser!.displayName!);
+      isSignIn = true;
+      authbox.write("auth", isSignIn);
       update();
       Get.offNamed(Routes.mainScreen);
     } on FirebaseAuthException catch (e) {
@@ -95,6 +101,9 @@ class Authcontroller extends GetxController {
     try {
       displayUserName = googleUser!.displayName!;
       displayUserPhoto = googleUser.photoUrl!;
+      isSignIn = true;
+      authbox.write("auth", isSignIn);
+
       update();
       Get.offNamed(Routes.mainScreen);
     } catch (e) {
@@ -130,5 +139,21 @@ class Authcontroller extends GetxController {
     }
   }
 
-  void logOutFireBase() async {}
+  void logOutFireBase() async {
+    try {
+      await auth.signOut();
+      await googleSignin.signOut();
+      displayUserName = '';
+      displayUserPhoto = '';
+      isSignIn = false;
+      authbox.remove("auth");
+      update();
+      Get.offNamed(Routes.loginScreen);
+    } catch (e) {
+      Get.snackbar('ERROR', e.toString(),
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  }
 }

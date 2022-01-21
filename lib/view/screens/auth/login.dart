@@ -147,7 +147,7 @@ class LoginScreen extends StatelessWidget {
                                   fontWeight: FontWeight.normal)),
                         ),
                         const SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
                         GetBuilder<Authcontroller>(
                           builder: (_) {
