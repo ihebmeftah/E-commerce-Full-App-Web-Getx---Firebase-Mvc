@@ -1,28 +1,49 @@
+import 'package:ecommerceapp/logic/controllers/productcontrollers.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loading_overlay_pro/animations/bouncing_line.dart';
 
 class Carditems extends StatelessWidget {
-  const Carditems({Key? key}) : super(key: key);
-
+  Carditems({Key? key}) : super(key: key);
+  final controller = Get.find<ProductControllers>();
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 0.8,
-            mainAxisSpacing: 9.0,
-            crossAxisCount: 2,
-            mainAxisExtent: 210),
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return buildCardItems();
-        },
-      ),
-    );
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Center(
+            child: LoadingBouncingLine.circle(
+          borderColor: Colors.cyan,
+          borderSize: 3.0,
+          size: 80.0,
+          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
+          duration: const Duration(milliseconds: 1500),
+        ));
+      } else {
+        return Expanded(
+          child: GridView.builder(
+            physics: const BouncingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 0.8,
+                mainAxisSpacing: 9.0,
+                crossAxisCount: 2,
+                mainAxisExtent: 210),
+            itemCount: controller.productList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return buildCardItems(
+                  img: controller.productList[index].image,
+                  price: controller.productList[index].price,
+                  rate: controller.productList[index].rating.rate);
+            },
+          ),
+        );
+      }
+    });
   }
 
-  Widget buildCardItems() {
+  Widget buildCardItems(
+      {required String img, required double price, required double rate}) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -58,9 +79,11 @@ class Carditems extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(10)),
               child: Stack(children: [
-                Image.network(
-                  "https://www.nicepng.com/png/detail/477-4773280_plain-tshirt-png-white-blank-t-shirts.png",
-                  fit: BoxFit.cover,
+                Center(
+                  child: Image.network(
+                    img,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -69,29 +92,44 @@ class Carditems extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          '\$ 15',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
+                        Container(
+                          height: 20,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              color: Get.isDarkMode ? mainColor : pinkClr,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 5.0, right: 5.0),
+                            child: Center(
+                              child: Text(
+                                '\$ $price',
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ),
                         Container(
                           height: 20,
                           width: 45,
                           decoration: BoxDecoration(
-                              color: mainColor,
+                              color: Get.isDarkMode ? mainColor : pinkClr,
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
                             padding:
                                 const EdgeInsets.only(left: 5.0, right: 5.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 TextUtils(
                                     clr: Colors.white,
-                                    txt: '4.7',
+                                    txt: '$rate',
                                     fontSize: 10,
                                     fontWeight: FontWeight.bold),
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   size: 13,
                                 )

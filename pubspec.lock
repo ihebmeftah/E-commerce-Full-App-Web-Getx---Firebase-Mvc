@@ -233,6 +233,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  loading_overlay_pro:
+    dependency: "direct main"
+    description:
+      name: loading_overlay_pro
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   matcher:
     dependency: transitive
     description:

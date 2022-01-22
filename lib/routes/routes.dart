@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/logic/bindings/authbindings.dart';
 import 'package:ecommerceapp/logic/bindings/mainbinfings.dart';
+import 'package:ecommerceapp/logic/bindings/productbindings.dart';
 import 'package:ecommerceapp/view/screens/auth/forgotpassword.dart';
 import 'package:ecommerceapp/view/screens/auth/login.dart';
 import 'package:ecommerceapp/view/screens/auth/signup.dart';
@@ -36,8 +37,8 @@ class Approutes {
     ),
     GetPage(
       name: Routes.mainScreen,
-      page: () =>  Mainscreen(),
-      bindings: [Authbindings(), MainBindings()],
+      page: () => Mainscreen(),
+      bindings: [Authbindings(), MainBindings(), ProductBinding()],
     ),
   ];
 }

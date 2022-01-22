@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.4
   animated_text_kit: ^4.2.1
   font_awesome_flutter: ^9.2.0
+  loading_overlay_pro: ^2.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
