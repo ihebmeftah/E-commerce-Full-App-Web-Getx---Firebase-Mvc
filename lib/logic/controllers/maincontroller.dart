@@ -10,7 +10,7 @@ class MainController extends GetxController {
   final RxList<Widget> tabs = [
     const HomeScreen(),
     const CategoryScreen(),
-    const FavoritesScreen(),
+   FavoritesScreen(),
      SettingsScreen()
   ].obs;
 

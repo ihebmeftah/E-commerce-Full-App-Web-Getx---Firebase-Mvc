@@ -34,7 +34,8 @@ class Carditems extends StatelessWidget {
               return buildCardItems(
                   img: controller.productList[index].image,
                   price: controller.productList[index].price,
-                  rate: controller.productList[index].rating.rate);
+                  rate: controller.productList[index].rating.rate,
+                  id: controller.productList[index].id);
             },
           ),
         );
@@ -43,7 +44,10 @@ class Carditems extends StatelessWidget {
   }
 
   Widget buildCardItems(
-      {required String img, required double price, required double rate}) {
+      {required String img,
+      required double price,
+      required double rate,
+      required int id}) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -58,21 +62,30 @@ class Carditems extends StatelessWidget {
             ]),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.favorite_outline),
-                  color: Colors.black,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.add_box_outlined),
-                  color: Colors.black,
-                ),
-              ],
-            ),
+            Obx(() {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      controller.mangFav(id);
+                    },
+                    icon: !controller.isFav(id)
+                        ? const Icon(Icons.favorite_outline)
+                        : const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                    color: Colors.black,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.add_box_outlined),
+                    color: Colors.black,
+                  ),
+                ],
+              );
+            }),
             Container(
               height: 140,
               width: double.infinity,
