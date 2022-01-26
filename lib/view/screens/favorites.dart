@@ -103,7 +103,7 @@ class FavoritesScreen extends StatelessWidget {
                   style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Get.isDarkMode ? Colors.black : Colors.white,
-                      fontSize: 16,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold),
                 ),
                 trailing: IconButton(
@@ -125,7 +125,7 @@ class FavoritesScreen extends StatelessWidget {
                       style: TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: Get.isDarkMode ? Colors.black : Colors.white,
-                        fontSize: 18,
+                        fontSize: 15,
                       ),
                     ),
                     const SizedBox(
@@ -136,8 +136,8 @@ class FavoritesScreen extends StatelessWidget {
                         TextUtils(
                             clr: Get.isDarkMode ? Colors.black : Colors.white,
                             txt: '$rate',
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300),
                         const SizedBox(
                           width: 5,
                         ),
@@ -153,10 +153,10 @@ class FavoritesScreen extends StatelessWidget {
                     ),
                     Text(
                       category,
-                      style: TextStyle(
+                      style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Get.isDarkMode ? Colors.black : Colors.white,
-                        fontSize: 18,
+                        color: Colors.grey,
+                        fontSize: 12,
                       ),
                     ),
                   ],

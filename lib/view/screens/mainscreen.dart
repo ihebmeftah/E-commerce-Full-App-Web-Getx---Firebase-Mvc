@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:ecommerceapp/logic/controllers/maincontroller.dart';
+import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,7 +19,9 @@ class Mainscreen extends StatelessWidget {
         appBar: AppBar(
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.pannierScreen);
+                },
                 icon: const FaIcon(FontAwesomeIcons.shoppingBasket))
           ],
           backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,

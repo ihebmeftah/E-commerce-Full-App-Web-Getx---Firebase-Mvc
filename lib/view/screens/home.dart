@@ -1,6 +1,6 @@
 import 'package:ecommerceapp/utils/theme.dart';
-import 'package:ecommerceapp/view/screens/home/carditems.dart';
-import 'package:ecommerceapp/view/screens/home/searchfield.dart';
+import 'package:ecommerceapp/view/widgets/home/carditems.dart';
+import 'package:ecommerceapp/view/widgets/home/searchfield.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
