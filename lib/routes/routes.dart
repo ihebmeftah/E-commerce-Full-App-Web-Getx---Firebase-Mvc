@@ -1,7 +1,7 @@
 import 'package:ecommerceapp/logic/bindings/authbindings.dart';
 import 'package:ecommerceapp/logic/bindings/mainbinfings.dart';
 import 'package:ecommerceapp/logic/bindings/productbindings.dart';
-import 'package:ecommerceapp/view/pannierscreen.dart';
+import 'package:ecommerceapp/view/screens/pannierscreen.dart';
 import 'package:ecommerceapp/view/screens/auth/forgotpassword.dart';
 import 'package:ecommerceapp/view/screens/auth/login.dart';
 import 'package:ecommerceapp/view/screens/auth/signup.dart';

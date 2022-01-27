@@ -1,15 +1,19 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:ecommerceapp/logic/controllers/maincontroller.dart';
+import 'package:ecommerceapp/logic/controllers/panniercontroller.dart';
 import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:badges/badges.dart';
 
 class Mainscreen extends StatelessWidget {
   Mainscreen({Key? key}) : super(key: key);
   final controller = Get.find<MainController>();
+  final panniercontroller = Get.find<PannierController>();
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -18,11 +22,22 @@ class Mainscreen extends StatelessWidget {
         backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
           actions: [
-            IconButton(
-                onPressed: () {
-                  Get.toNamed(Routes.pannierScreen);
-                },
-                icon: const FaIcon(FontAwesomeIcons.shoppingBasket))
+            Badge(
+              position: BadgePosition.topEnd(top: 0, end: 3),
+              animationDuration: const Duration(milliseconds: 300),
+              animationType: BadgeAnimationType.slide,
+              badgeContent: Text(
+                panniercontroller.productMap.isNotEmpty
+                    ? panniercontroller.productMap.length.toString()
+                    : '',
+                style: const TextStyle(color: Colors.white),
+              ),
+              child: IconButton(
+                  onPressed: () {
+                    Get.toNamed(Routes.pannierScreen);
+                  },
+                  icon: const FaIcon(FontAwesomeIcons.shoppingBasket)),
+            )
           ],
           backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,
           elevation: 0,

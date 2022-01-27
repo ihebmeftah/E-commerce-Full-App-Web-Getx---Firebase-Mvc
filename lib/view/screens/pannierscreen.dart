@@ -181,8 +181,8 @@ class PannierScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: NetworkImage(productModels.image),
-                      fit: BoxFit.cover))),
+                    image: NetworkImage(productModels.image),
+                  ))),
           const SizedBox(
             width: 20,
           ),
