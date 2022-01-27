@@ -43,7 +43,7 @@ class Approutes {
     ),
     GetPage(
         name: Routes.pannierScreen,
-        page: () =>  PannierScreen(),
+        page: () => PannierScreen(),
         bindings: [Authbindings(), ProductBinding()]),
   ];
 }

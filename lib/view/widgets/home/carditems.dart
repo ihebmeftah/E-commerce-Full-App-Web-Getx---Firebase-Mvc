@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loading_overlay_pro/animations/bouncing_line.dart';
+
 import 'package:ecommerceapp/logic/controllers/panniercontroller.dart';
 import 'package:ecommerceapp/logic/controllers/productcontrollers.dart';
 import 'package:ecommerceapp/models/productmodels.dart';
 import 'package:ecommerceapp/utils/theme.dart';
+import 'package:ecommerceapp/view/screens/productdetailsscreen.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:loading_overlay_pro/animations/bouncing_line.dart';
 
 class Carditems extends StatelessWidget {
   Carditems({Key? key}) : super(key: key);
@@ -39,7 +41,8 @@ class Carditems extends StatelessWidget {
                   price: controller.productList[index].price,
                   rate: controller.productList[index].rating.rate,
                   id: controller.productList[index].id,
-                  prodMod: controller.productList[index]);
+                  prodMod: controller.productList[index],
+                  index: index);
             },
           ),
         );
@@ -52,118 +55,128 @@ class Carditems extends StatelessWidget {
       required double price,
       required double rate,
       required int id,
-      required ProductModels prodMod}) {
+      required ProductModels prodMod,
+      required int index}) {
     return Padding(
       padding: const EdgeInsets.all(5),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3,
-                  blurRadius: 5)
-            ]),
-        child: Column(
-          children: [
-            Obx(() {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      controller.mangFav(id);
-                    },
-                    icon: !controller.isFav(id)
-                        ? const Icon(Icons.favorite_outline)
-                        : const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                    color: Colors.black,
+      child: InkWell(
+        onTap: () {
+          Get.to(ProductDetails(
+            productModels: controller.productList[index],
+          ));
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 5)
+              ]),
+          child: Column(
+            children: [
+              Obx(() {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        controller.mangFav(id);
+                      },
+                      icon: !controller.isFav(id)
+                          ? const Icon(Icons.favorite_outline)
+                          : const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            ),
+                      color: Colors.black,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        pannierController.addproductTopannier(prodMod);
+                      },
+                      icon: const Icon(Icons.shopping_cart),
+                      color: Colors.black,
+                    ),
+                  ],
+                );
+              }),
+              Container(
+                height: 140,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Stack(children: [
+                  Center(
+                    child: Image.network(
+                      img,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      pannierController.addproductTopannier(prodMod);
-                    },
-                    icon: const Icon(Icons.shopping_cart),
-                    color: Colors.black,
-                  ),
-                ],
-              );
-            }),
-            Container(
-              height: 140,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              child: Stack(children: [
-                Center(
-                  child: Image.network(
-                    img,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 60,
-                          decoration: BoxDecoration(
-                              color: Get.isDarkMode ? mainColor : pinkClr,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 5.0, right: 5.0),
-                            child: Center(
-                              child: Text(
-                                '\$ $price',
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                color: Get.isDarkMode ? mainColor : pinkClr,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5.0, right: 5.0),
+                              child: Center(
+                                child: Text(
+                                  '\$ $price',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          height: 20,
-                          width: 45,
-                          decoration: BoxDecoration(
-                              color: Get.isDarkMode ? mainColor : pinkClr,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 5.0, right: 5.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextUtils(
-                                    clr: Colors.white,
-                                    txt: '$rate',
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold),
-                                const Icon(
-                                  Icons.star,
-                                  size: 13,
-                                )
-                              ],
+                          Container(
+                            height: 20,
+                            width: 45,
+                            decoration: BoxDecoration(
+                                color: Get.isDarkMode ? mainColor : pinkClr,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5.0, right: 5.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextUtils(
+                                      clr: Colors.white,
+                                      txt: '$rate',
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
+                                  const Icon(
+                                    Icons.star,
+                                    size: 13,
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ]),
-            ),
-          ],
+                  )
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
