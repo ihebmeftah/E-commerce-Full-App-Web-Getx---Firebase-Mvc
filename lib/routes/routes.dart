@@ -42,9 +42,9 @@ class Approutes {
       bindings: [Authbindings(), MainBindings(), ProductBinding()],
     ),
     GetPage(
-      name: Routes.pannierScreen,
-      page: () => const PannierScreen(),
-    ),
+        name: Routes.pannierScreen,
+        page: () =>  PannierScreen(),
+        bindings: [Authbindings(), ProductBinding()]),
   ];
 }
 

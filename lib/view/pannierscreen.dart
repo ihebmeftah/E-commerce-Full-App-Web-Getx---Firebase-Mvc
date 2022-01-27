@@ -1,11 +1,13 @@
+import 'package:ecommerceapp/logic/controllers/panniercontroller.dart';
+import 'package:ecommerceapp/models/productmodels.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PannierScreen extends StatelessWidget {
-  const PannierScreen({Key? key}) : super(key: key);
-
+  PannierScreen({Key? key}) : super(key: key);
+  final panniercontroller = Get.find<PannierController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,36 +18,54 @@ class PannierScreen extends StatelessWidget {
         title: const Text('Pannier Items'),
         backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.backspace))
+          IconButton(
+              onPressed: () {
+                panniercontroller.clearALL();
+              },
+              icon: const Icon(Icons.backspace))
         ],
       ),
-      body: SingleChildScrollView(
-          child: Column(
-        children: [
-          SizedBox(
-            height: 500,
-            child: ListView.separated(
-              itemCount: 1,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 20,
-                );
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return cardProduct();
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: cardTotal(),
-          ),
-        ],
-      )),
+      body: Obx(() {
+        if (panniercontroller.productMap.isEmpty) {
+          return emptyCart();
+        } else {
+          return SingleChildScrollView(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 500,
+                child: ListView.separated(
+                  itemCount: panniercontroller.productMap.length,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 20,
+                    );
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    return cardProduct(
+                        productModels:
+                            panniercontroller.productMap.keys.toList()[index],
+                        index: index,
+                        qte: panniercontroller.productMap.values
+                            .toList()[index]);
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Obx(
+                    () => cardTotal(totale: panniercontroller.totalPannier)),
+              ),
+            ],
+          ));
+        }
+      }),
     ));
   }
 
-  Widget cardTotal() {
+  Widget cardTotal({
+    required String totale,
+  }) {
     return Container(
       padding: const EdgeInsets.all(25),
       child: Row(
@@ -60,7 +80,7 @@ class PannierScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold),
               TextUtils(
                   clr: !Get.isDarkMode ? Colors.white : Colors.black,
-                  txt: '99.99',
+                  txt: '\$ $totale',
                   fontSize: 20,
                   fontWeight: FontWeight.bold)
             ],
@@ -137,7 +157,10 @@ class PannierScreen extends StatelessWidget {
     );
   }
 
-  Widget cardProduct() {
+  Widget cardProduct(
+      {required ProductModels productModels,
+      required int index,
+      required int qte}) {
     return Container(
       margin: const EdgeInsets.all(10),
       height: 130,
@@ -157,9 +180,8 @@ class PannierScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                          'https://i.pinimg.com/originals/bd/ef/cb/bdefcbc72735f64db17f3250b1e64245.png'),
+                  image: DecorationImage(
+                      image: NetworkImage(productModels.image),
                       fit: BoxFit.cover))),
           const SizedBox(
             width: 20,
@@ -170,7 +192,7 @@ class PannierScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'opjaeopjfapfjefepafaneanfapfajeifaefafapian',
+                productModels.title,
                 style: TextStyle(
                     color: !Get.isDarkMode ? Colors.white : Colors.black,
                     fontSize: 14,
@@ -181,7 +203,7 @@ class PannierScreen extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                '\$ 555.9',
+                '\$ ${panniercontroller.productPrice[index].toStringAsFixed(2)}',
                 style: TextStyle(
                     color: !Get.isDarkMode ? Colors.white : Colors.black,
                     fontSize: 14,
@@ -196,21 +218,25 @@ class PannierScreen extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        panniercontroller.removeproductTopannier(productModels);
+                      },
                       icon: Icon(
                         Icons.remove_circle,
                         color: !Get.isDarkMode ? Colors.white : Colors.black,
                       )),
-                  const Text(
-                    '1',
-                    style: TextStyle(
+                  Text(
+                    '$qte',
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         overflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        panniercontroller.addproductTopannier(productModels);
+                      },
                       icon: Icon(
                         Icons.add_circle,
                         color: !Get.isDarkMode ? Colors.white : Colors.black,
@@ -218,7 +244,9 @@ class PannierScreen extends StatelessWidget {
                 ],
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    panniercontroller.removeOneProduct(productModels);
+                  },
                   icon: Icon(
                     Icons.delete,
                     color: Get.isDarkMode ? Colors.red : Colors.black,

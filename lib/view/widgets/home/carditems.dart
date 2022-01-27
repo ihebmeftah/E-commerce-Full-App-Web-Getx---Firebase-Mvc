@@ -1,4 +1,6 @@
+import 'package:ecommerceapp/logic/controllers/panniercontroller.dart';
 import 'package:ecommerceapp/logic/controllers/productcontrollers.dart';
+import 'package:ecommerceapp/models/productmodels.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:loading_overlay_pro/animations/bouncing_line.dart';
 class Carditems extends StatelessWidget {
   Carditems({Key? key}) : super(key: key);
   final controller = Get.find<ProductControllers>();
+  final pannierController = Get.find<PannierController>();
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -35,7 +38,8 @@ class Carditems extends StatelessWidget {
                   img: controller.productList[index].image,
                   price: controller.productList[index].price,
                   rate: controller.productList[index].rating.rate,
-                  id: controller.productList[index].id);
+                  id: controller.productList[index].id,
+                  prodMod: controller.productList[index]);
             },
           ),
         );
@@ -47,7 +51,8 @@ class Carditems extends StatelessWidget {
       {required String img,
       required double price,
       required double rate,
-      required int id}) {
+      required int id,
+      required ProductModels prodMod}) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Container(
@@ -79,8 +84,10 @@ class Carditems extends StatelessWidget {
                     color: Colors.black,
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.add_box_outlined),
+                    onPressed: () {
+                      pannierController.addproductTopannier(prodMod);
+                    },
+                    icon: const Icon(Icons.shopping_cart),
                     color: Colors.black,
                   ),
                 ],
