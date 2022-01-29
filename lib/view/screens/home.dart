@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Expanded(
+                             Expanded(
                               child: SearchFormtext(),
                               flex: 6,
                             ),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                 Carditems()
+                Carditems()
               ],
             )));
   }

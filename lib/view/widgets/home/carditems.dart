@@ -27,24 +27,49 @@ class Carditems extends StatelessWidget {
         ));
       } else {
         return Expanded(
-          child: GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 0.8,
-                mainAxisSpacing: 9.0,
-                crossAxisCount: 2,
-                mainAxisExtent: 210),
-            itemCount: controller.productList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return buildCardItems(
-                  img: controller.productList[index].image,
-                  price: controller.productList[index].price,
-                  rate: controller.productList[index].rating.rate,
-                  id: controller.productList[index].id,
-                  prodMod: controller.productList[index],
-                  index: index);
-            },
-          ),
+          child: controller.searchList.isEmpty &&
+                  controller.searchValue.text.isNotEmpty
+              ? Image.asset('images/search_empty_dark.png')
+              : GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.8,
+                      mainAxisSpacing: 9.0,
+                      crossAxisCount: 2,
+                      mainAxisExtent: 210),
+                  itemCount: controller.searchList.isEmpty
+                      ? controller.productList.length
+                      : controller.searchList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (controller.searchList.isEmpty) {
+                      return buildCardItems(
+                          img: controller.productList[index].image,
+                          price: controller.productList[index].price,
+                          rate: controller.productList[index].rating.rate,
+                          id: controller.productList[index].id,
+                          prodMod: controller.productList[index],
+                          index: index,
+                          ontap: () {
+                            Get.to(ProductDetails(
+                              productModels: controller.productList[index],
+                            ));
+                          });
+                    } else {
+                      return buildCardItems(
+                          img: controller.searchList[index].image,
+                          price: controller.searchList[index].price,
+                          rate: controller.searchList[index].rating.rate,
+                          id: controller.searchList[index].id,
+                          prodMod: controller.searchList[index],
+                          index: index,
+                          ontap: () {
+                            Get.to(ProductDetails(
+                              productModels: controller.searchList[index],
+                            ));
+                          });
+                    }
+                  },
+                ),
         );
       }
     });
@@ -56,15 +81,12 @@ class Carditems extends StatelessWidget {
       required double rate,
       required int id,
       required ProductModels prodMod,
-      required int index}) {
+      required int index,
+      required Function() ontap}) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: InkWell(
-        onTap: () {
-          Get.to(ProductDetails(
-            productModels: controller.productList[index],
-          ));
-        },
+        onTap: ontap,
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
