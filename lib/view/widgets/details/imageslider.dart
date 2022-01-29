@@ -136,7 +136,7 @@ class _ImageSliderState extends State<ImageSlider> {
                         badgeContent: Text(
                           panniercontroller.productMap.isNotEmpty
                               ? panniercontroller.productMap.length.toString()
-                              : '',
+                              : '0',
                           style: const TextStyle(color: Colors.white),
                         ),
                         child: IconButton(

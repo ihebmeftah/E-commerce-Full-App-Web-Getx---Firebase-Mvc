@@ -47,6 +47,9 @@ dependencies:
   badges: ^2.0.2
   smooth_page_indicator: ^1.0.0+2
   carousel_slider: ^4.0.0  
+  flutter_rating_bar: ^4.0.0
+  flutter_simple_rating_bar: ^0.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
