@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/models/productmodels.dart';
+import 'package:ecommerceapp/view/widgets/details/addcart.dart';
 import 'package:ecommerceapp/view/widgets/details/clothesinfor.dart';
 import 'package:ecommerceapp/view/widgets/details/imageslider.dart';
 import 'package:ecommerceapp/view/widgets/details/sizelist.dart';
@@ -29,6 +30,10 @@ class ProductDetails extends StatelessWidget {
                 descp: productModels.description,
               ),
               const SizeLlist(),
+              AddCart(
+                price: productModels.price,
+                prodModel: productModels,
+              ),
             ],
           ),
         ),
