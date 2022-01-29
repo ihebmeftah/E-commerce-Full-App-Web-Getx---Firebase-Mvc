@@ -54,7 +54,7 @@ class AddCart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextUtils(
-                      clr: Get.isDarkMode ? Colors.black : Colors.white,
+                      clr: !Get.isDarkMode ? Colors.black : Colors.white,
                       txt: 'Add to Cart',
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
