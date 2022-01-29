@@ -1,14 +1,21 @@
 import 'package:ecommerceapp/logic/controllers/productcontrollers.dart';
+import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:readmore/readmore.dart';
 
 class ClothesInfo extends StatelessWidget {
   ClothesInfo(
-      {Key? key, required this.title, required this.id, required this.rate})
+      {Key? key,
+      required this.title,
+      required this.id,
+      required this.rate,
+      required this.descp})
       : super(key: key);
   final String title;
+  final String descp;
   final double rate;
   final int id;
 
@@ -80,6 +87,27 @@ class ClothesInfo extends StatelessWidget {
                 ignoreGestures: true,
               )
             ],
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          ReadMoreText(
+            descp,
+            trimLines: 3,
+            trimMode: TrimMode.Line,
+            textAlign: TextAlign.justify,
+            trimCollapsedText: 'Show more.',
+            trimExpandedText: 'Show less.',
+            moreStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Get.isDarkMode ? mainColor : pinkClr,
+            ),
+            style: TextStyle(
+              fontSize: 16,
+              height: 2,
+              color: Get.isDarkMode ? Colors.black : Colors.white,
+            ),
           )
         ],
       ),
