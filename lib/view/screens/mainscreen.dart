@@ -33,10 +33,11 @@ class Mainscreen extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
               child: IconButton(
-                  onPressed: () {
-                    Get.toNamed(Routes.pannierScreen);
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.shoppingBasket)),
+                onPressed: () {
+                  Get.toNamed(Routes.pannierScreen);
+                },
+                icon: const FaIcon(FontAwesomeIcons.shoppingCart),
+              ),
             )
           ],
           backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,
