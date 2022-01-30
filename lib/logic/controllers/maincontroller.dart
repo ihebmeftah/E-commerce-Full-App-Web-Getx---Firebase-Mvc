@@ -9,7 +9,7 @@ class MainController extends GetxController {
   RxInt currentindex = 0.obs;
   final RxList<Widget> tabs = [
     const HomeScreen(),
-    const CategoryScreen(),
+     CategoryScreen(),
    FavoritesScreen(),
      SettingsScreen()
   ].obs;

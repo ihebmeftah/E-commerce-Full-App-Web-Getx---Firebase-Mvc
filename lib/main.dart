@@ -7,7 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'logic/bindings/productbindings.dart';
+
 void main() async {
+  ProductBinding().dependencies();
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: FirebaseAuth.instance.currentUser != null ||
               GetStorage().read<bool>('auth') == true
-          ? Approutes.mainscreen 
+          ? Approutes.mainscreen
           : Approutes.welcome,
       getPages: Approutes.routes,
     );

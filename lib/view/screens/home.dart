@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                             Expanded(
+                            Expanded(
                               child: SearchFormtext(),
                               flex: 6,
                             ),
@@ -68,12 +68,12 @@ class HomeScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 18.0, top: 8),
+                    padding: const EdgeInsets.only(left: 18.0, top: 10),
                     child: TextUtils(
                         clr: !Get.isDarkMode ? Colors.white : Colors.black,
-                        txt: 'Categories',
+                        txt: 'Products ',
                         fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(
