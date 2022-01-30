@@ -48,7 +48,23 @@ class AddCart extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15))),
               onPressed: () {
-                cartController.addproductTopannier(prodModel);
+                try {
+                  cartController.addproductTopannier(prodModel);
+
+                  Get.snackbar('Successfully ', 'Add to your cart successfully',
+                      backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
+                      colorText: Colors.white,
+                      snackPosition: SnackPosition.BOTTOM,
+                      margin: const EdgeInsets.all(10));
+                } catch (e) {
+                  Get.snackbar(
+                    'Error ',
+                    'Error in  add to your cart ',
+                    backgroundColor: Colors.redAccent,
+                    colorText: Colors.white,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

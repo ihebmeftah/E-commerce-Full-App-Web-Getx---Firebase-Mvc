@@ -19,6 +19,7 @@ class AuthFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: const TextStyle(color: Colors.black),
       textInputAction: TextInputAction.next,
       controller: cntrl,
       obscureText: isPass,

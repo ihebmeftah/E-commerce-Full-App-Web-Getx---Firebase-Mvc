@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
 import 'package:ecommerceapp/routes/routes.dart';
+import 'package:ecommerceapp/utils/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,14 +55,20 @@ class Authcontroller extends GetxController {
       }
 
       Get.snackbar(title, message,
-          backgroundColor: Colors.green,
+          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     } catch (e) {
       Get.snackbar('ERROR', e.toString(),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     }
   }
 
@@ -85,14 +92,18 @@ class Authcontroller extends GetxController {
         message = e.message.toString();
       }
       Get.snackbar(title, message,
-          backgroundColor: Colors.green,
+          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     } catch (e) {
       Get.snackbar('ERROR', e.toString(),
-          backgroundColor: Colors.green,
+          margin: const EdgeInsets.all(20),
+          backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP);
     }
   }
 
@@ -108,9 +119,11 @@ class Authcontroller extends GetxController {
       Get.offNamed(Routes.mainScreen);
     } catch (e) {
       Get.snackbar('ERROR', e.toString(),
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          backgroundColor: Colors.redAccent,
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     }
   }
 
@@ -128,14 +141,20 @@ class Authcontroller extends GetxController {
         message = e.message.toString();
       }
       Get.snackbar(title, message,
-          backgroundColor: Colors.green,
+          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     } catch (e) {
       Get.snackbar('ERROR', e.toString(),
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
+          colorText: Colors.redAccent,
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     }
   }
 
@@ -148,12 +167,15 @@ class Authcontroller extends GetxController {
       isSignIn = false;
       authbox.remove("auth");
       update();
-      Get.offNamed(Routes.loginScreen);
+      Get.offAllNamed(Routes.loginScreen);
     } catch (e) {
       Get.snackbar('ERROR', e.toString(),
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.redAccent,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.all(20),
+          borderWidth: 2,
+          borderColor: Colors.white);
     }
   }
 }
