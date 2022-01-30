@@ -105,7 +105,49 @@ class Carditems extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        controller.mangFav(id);
+                        if (!controller.isFav(id)) {
+                          try {
+                            controller.mangFav(id);
+
+                            Get.snackbar('Successfully ',
+                                'Your product was Successfully added to your favorites ',
+                                backgroundColor:
+                                    Get.isDarkMode ? mainColor : pinkClr,
+                                colorText: Colors.white,
+                                snackPosition: SnackPosition.BOTTOM,
+                                margin: const EdgeInsets.all(10),
+                                isDismissible: true);
+                          } catch (e) {
+                            Get.snackbar(
+                              'Error ',
+                              'Error in  add to your cart ',
+                              backgroundColor: Colors.redAccent,
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                          }
+                        } else {
+                          try {
+                            controller.mangFav(id);
+
+                            Get.snackbar('Successfully Removed ',
+                                'Your product was Successfully added from your favorites ',
+                                backgroundColor:
+                                    Get.isDarkMode ? mainColor : pinkClr,
+                                colorText: Colors.white,
+                                snackPosition: SnackPosition.BOTTOM,
+                                margin: const EdgeInsets.all(10),
+                                isDismissible: true);
+                          } catch (e) {
+                            Get.snackbar(
+                              'Error ',
+                              'Error in  add to your cart ',
+                              backgroundColor: Colors.redAccent,
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                          }
+                        }
                       },
                       icon: !controller.isFav(id)
                           ? const Icon(Icons.favorite_outline)
@@ -118,6 +160,27 @@ class Carditems extends StatelessWidget {
                     IconButton(
                       onPressed: () {
                         pannierController.addproductTopannier(prodMod);
+
+                        try {
+                          pannierController.addproductTopannier(prodMod);
+
+                          Get.snackbar('Successfully ',
+                              'Your product was Successfully added to your cart ',
+                              backgroundColor:
+                                  Get.isDarkMode ? mainColor : pinkClr,
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                              margin: const EdgeInsets.all(10),
+                              isDismissible: true);
+                        } catch (e) {
+                          Get.snackbar(
+                            'Error ',
+                            'Error in  add to your cart ',
+                            backgroundColor: Colors.redAccent,
+                            colorText: Colors.white,
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
+                        }
                       },
                       icon: const Icon(Icons.shopping_cart),
                       color: Colors.black,
