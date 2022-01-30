@@ -9,14 +9,29 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authcontroller extends GetxController {
+  var dropdownValue = 'One'.obs;
+
   bool isVisible = false;
   bool ischecked = false;
-  String displayUserName = '';
-  String displayUserPhoto = '';
+  var displayUserName = ''.obs;
+  var displayUserPhoto = ''.obs;
+  var displayUserMail = ''.obs;
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSignin = GoogleSignIn();
   bool isSignIn = false;
   final GetStorage authbox = GetStorage();
+
+  User? get userProfile => auth.currentUser;
+  @override
+  void onInit() {
+    displayUserName.value =
+        (userProfile != null ? userProfile!.displayName : "")!;
+
+    displayUserPhoto.value =
+        (userProfile != null ? userProfile!.photoURL : "")!;
+    displayUserMail.value = (userProfile != null ? userProfile!.email : "")!;
+    super.onInit();
+  }
 
   void visibile() {
     isVisible = !isVisible;
@@ -36,7 +51,7 @@ class Authcontroller extends GetxController {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUserName = name;
+        displayUserName.value = name;
         auth.currentUser!.updateDisplayName(name);
       });
 
@@ -76,7 +91,8 @@ class Authcontroller extends GetxController {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => displayUserName = auth.currentUser!.displayName!);
+          .then((value) =>
+              displayUserName.value = auth.currentUser!.displayName!);
       isSignIn = true;
       authbox.write("auth", isSignIn);
       update();
@@ -110,8 +126,16 @@ class Authcontroller extends GetxController {
   void googlesignUpFireBase() async {
     final GoogleSignInAccount? googleUser = await googleSignin.signIn();
     try {
-      displayUserName = googleUser!.displayName!;
-      displayUserPhoto = googleUser.photoUrl!;
+      displayUserName.value = googleUser!.displayName!;
+      displayUserPhoto.value = googleUser.photoUrl!;
+      displayUserMail.value = googleUser.email;
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser.authentication;
+      final AuthCredential cred = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+      await auth.signInWithCredential(cred);
+
       isSignIn = true;
       authbox.write("auth", isSignIn);
 
@@ -162,8 +186,8 @@ class Authcontroller extends GetxController {
     try {
       await auth.signOut();
       await googleSignin.signOut();
-      displayUserName = '';
-      displayUserPhoto = '';
+      displayUserName.value = '';
+      displayUserPhoto.value = '';
       isSignIn = false;
       authbox.remove("auth");
       update();
