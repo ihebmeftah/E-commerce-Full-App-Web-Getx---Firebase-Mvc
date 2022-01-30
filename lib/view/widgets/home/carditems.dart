@@ -50,9 +50,9 @@ class Carditems extends StatelessWidget {
                           prodMod: controller.productList[index],
                           index: index,
                           ontap: () {
-                            Get.to(ProductDetails(
-                              productModels: controller.productList[index],
-                            ));
+                            Get.to(() => ProductDetails(
+                                  productModels: controller.productList[index],
+                                ));
                           });
                     } else {
                       return buildCardItems(
@@ -63,9 +63,9 @@ class Carditems extends StatelessWidget {
                           prodMod: controller.searchList[index],
                           index: index,
                           ontap: () {
-                            Get.to(ProductDetails(
-                              productModels: controller.searchList[index],
-                            ));
+                            Get.to(() => ProductDetails(
+                                  productModels: controller.searchList[index],
+                                ));
                           });
                     }
                   },

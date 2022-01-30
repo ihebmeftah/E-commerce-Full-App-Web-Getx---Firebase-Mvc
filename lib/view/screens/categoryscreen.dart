@@ -39,7 +39,9 @@ class CategoryScreen extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            Get.to(Categoryitems());
+            categoryController
+                .getAllCategory(categoryController.categoryName[index]);
+            Get.to(() => Categoryitems());
           },
           child: Padding(
             padding: const EdgeInsets.all(10.0),

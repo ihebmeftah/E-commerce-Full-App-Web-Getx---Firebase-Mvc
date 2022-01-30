@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/logic/controllers/categorycontroller.dart';
 import 'package:ecommerceapp/view/screens/productdetailsscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class Categoryitems extends StatelessWidget {
   Categoryitems({Key? key}) : super(key: key);
   final controller = Get.find<ProductControllers>();
   final pannierController = Get.find<PannierController>();
+  final catController = Get.find<CategoryControlle>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +26,7 @@ class Categoryitems extends StatelessWidget {
         backgroundColor: Get.isDarkMode ? mainColor : darkGreyClr,
       ),
       body: Obx(() {
-        if (controller.isLoading.value) {
+        if (catController.catALLLoading.value) {
           return Center(
               child: LoadingBouncingLine.circle(
             borderColor: Colors.cyan,
@@ -40,19 +43,19 @@ class Categoryitems extends StatelessWidget {
                 mainAxisSpacing: 9.0,
                 crossAxisCount: 2,
                 mainAxisExtent: 210),
-            itemCount: controller.productList.length,
+            itemCount: catController.categoryAll.length,
             itemBuilder: (BuildContext context, int index) {
               return buildCardItems(
-                  img: controller.productList[index].image,
-                  price: controller.productList[index].price,
-                  rate: controller.productList[index].rating.rate,
-                  id: controller.productList[index].id,
-                  prodMod: controller.productList[index],
+                  img: catController.categoryAll[index].image,
+                  price: catController.categoryAll[index].price,
+                  rate: catController.categoryAll[index].rating.rate,
+                  id: catController.categoryAll[index].id,
+                  prodMod: catController.categoryAll[index],
                   index: index,
                   ontap: () {
-                    Get.to(ProductDetails(
-                      productModels: controller.productList[index],
-                    ));
+                    Get.to(() => ProductDetails(
+                          productModels: catController.categoryAll[index],
+                        ));
                   });
             },
           );
