@@ -165,16 +165,6 @@ class Carditems extends StatelessWidget {
 
                         try {
                           pannierController.addproductTopannier(prodMod);
-
-                          Get.snackbar('Successfully ',
-                              'Your product was Successfully added to your cart ',
-                              backgroundColor:
-                                  Get.isDarkMode ? mainColor : pinkClr,
-                              colorText: Colors.white,
-                              duration: const Duration(seconds: 2),
-                              snackPosition: SnackPosition.BOTTOM,
-                              margin: const EdgeInsets.all(10),
-                              isDismissible: true);
                         } catch (e) {
                           Get.snackbar(
                             'Error ',

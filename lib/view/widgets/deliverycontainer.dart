@@ -26,10 +26,10 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
     return Column(
       children: [
         buildRadioContiner(
-          address: "Egypt,sohag medanelshoban el moslmean",
-          name: "asroo store",
-          phone: "51-887-9932",
-          title: "Asroo Shop",
+          address: "Tunisia,Tunis",
+          name: "Iheb store",
+          phone: "51887932",
+          title: "Iheb Shop",
           value: 1,
           color: changeColors ? Colors.white : Colors.grey.shade300,
           icon: Container(),
@@ -81,6 +81,7 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
                       cursorColor: Colors.black,
                       maxLength: 11,
                       keyboardType: TextInputType.text,
+                      style: const TextStyle(color: Colors.black),
                       onSubmitted: (value) {
                         phoneController.text = value;
                       },
@@ -227,12 +228,14 @@ class _DeliveryContinerWidgetState extends State<DeliveryContinerWidget> {
                 const SizedBox(
                   height: 5,
                 ),
-                TextUtils(
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  txt: address,
-                  clr: Colors.black,
-                ),
+                Text(
+                  address,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 12,
+                      overflow: TextOverflow.ellipsis),
+                )
               ],
             ),
           ),
