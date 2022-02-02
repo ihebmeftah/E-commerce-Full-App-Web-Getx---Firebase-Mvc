@@ -1,6 +1,7 @@
 import 'package:ecommerceapp/logic/bindings/authbindings.dart';
 import 'package:ecommerceapp/logic/bindings/mainbinfings.dart';
 import 'package:ecommerceapp/logic/bindings/productbindings.dart';
+import 'package:ecommerceapp/view/screens/auth/payment.dart';
 import 'package:ecommerceapp/view/screens/pannierscreen.dart';
 import 'package:ecommerceapp/view/screens/auth/forgotpassword.dart';
 import 'package:ecommerceapp/view/screens/auth/login.dart';
@@ -45,6 +46,10 @@ class Approutes {
         name: Routes.pannierScreen,
         page: () => PannierScreen(),
         bindings: [Authbindings(), ProductBinding()]),
+    GetPage(
+        name: Routes.payScreen,
+        page: () => PaymentScreen(),
+        bindings: [Authbindings(), ProductBinding(), MainBindings()]),
   ];
 }
 
@@ -55,4 +60,5 @@ class Routes {
   static const forgotPasswordScreen = '/forgotPasswordScreen';
   static const mainScreen = '/mainScreen';
   static const pannierScreen = '/pannierScreen';
+  static const payScreen = '/payScreen';
 }

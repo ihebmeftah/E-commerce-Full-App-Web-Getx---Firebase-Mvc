@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/logic/controllers/panniercontroller.dart';
 import 'package:ecommerceapp/models/productmodels.dart';
+import 'package:ecommerceapp/routes/routes.dart';
 import 'package:ecommerceapp/utils/theme.dart';
 import 'package:ecommerceapp/view/widgets/textutils.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,9 @@ class PannierScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10)),
                     elevation: 0,
                     primary: Get.isDarkMode ? mainColor : pinkClr),
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.payScreen);
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
