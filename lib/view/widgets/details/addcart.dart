@@ -54,6 +54,7 @@ class AddCart extends StatelessWidget {
                   Get.snackbar('Successfully ', 'Add to your cart successfully',
                       backgroundColor: Get.isDarkMode ? mainColor : pinkClr,
                       colorText: Colors.white,
+                      duration: const Duration(seconds: 1),
                       snackPosition: SnackPosition.BOTTOM,
                       margin: const EdgeInsets.all(10));
                 } catch (e) {

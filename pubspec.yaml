@@ -51,6 +51,8 @@ dependencies:
   flutter_simple_rating_bar: ^0.0.3
   readmore: ^2.1.0
   language_picker: ^0.4.1
+  geolocator: ^8.0.5
+  geocoding: ^2.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

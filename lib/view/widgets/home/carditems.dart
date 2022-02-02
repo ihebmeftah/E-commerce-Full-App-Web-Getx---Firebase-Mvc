@@ -116,7 +116,8 @@ class Carditems extends StatelessWidget {
                                 colorText: Colors.white,
                                 snackPosition: SnackPosition.BOTTOM,
                                 margin: const EdgeInsets.all(10),
-                                isDismissible: true);
+                                isDismissible: true,
+                                duration: const Duration(seconds: 2));
                           } catch (e) {
                             Get.snackbar(
                               'Error ',
@@ -137,7 +138,8 @@ class Carditems extends StatelessWidget {
                                 colorText: Colors.white,
                                 snackPosition: SnackPosition.BOTTOM,
                                 margin: const EdgeInsets.all(10),
-                                isDismissible: true);
+                                isDismissible: true,
+                                duration: const Duration(seconds: 2));
                           } catch (e) {
                             Get.snackbar(
                               'Error ',
@@ -169,6 +171,7 @@ class Carditems extends StatelessWidget {
                               backgroundColor:
                                   Get.isDarkMode ? mainColor : pinkClr,
                               colorText: Colors.white,
+                              duration: const Duration(seconds: 2),
                               snackPosition: SnackPosition.BOTTOM,
                               margin: const EdgeInsets.all(10),
                               isDismissible: true);

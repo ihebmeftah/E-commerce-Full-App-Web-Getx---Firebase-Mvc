@@ -99,7 +99,7 @@ class PannierScreen extends StatelessWidget {
                     elevation: 0,
                     primary: Get.isDarkMode ? mainColor : pinkClr),
                 onPressed: () {
-                  Get.toNamed(Routes.payScreen);
+                  Get.offNamed(Routes.paymentScreen);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
