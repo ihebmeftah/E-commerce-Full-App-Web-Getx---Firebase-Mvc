@@ -161,8 +161,6 @@ class Carditems extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        pannierController.addproductTopannier(prodMod);
-
                         try {
                           pannierController.addproductTopannier(prodMod);
                         } catch (e) {
