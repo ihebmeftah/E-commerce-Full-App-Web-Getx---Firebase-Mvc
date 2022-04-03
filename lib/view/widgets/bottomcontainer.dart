@@ -14,7 +14,7 @@ class BottomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 90,
+      height: GetPlatform.isWeb ? 95 : 90,
       decoration: BoxDecoration(
         color: Get.isDarkMode ? mainColor : pinkClr,
         borderRadius: const BorderRadius.only(

@@ -8,12 +8,15 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'logic/bindings/productbindings.dart';
+import 'firebase_options.dart';
 
 void main() async {
   ProductBinding().dependencies();
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await GetStorage.init();
   runApp(const MyApp());
 }
